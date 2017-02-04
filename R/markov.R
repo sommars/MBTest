@@ -35,8 +35,16 @@
 #' )
 #' 
 #' # cpp ~ 20-25x faster
-library(m2r)
+#' 
+#' 
+#' 
+#' 
+#' compareMtoK(handy, hmat(c(2,2), as.list(1:2)))
+#' compareMtoK(handy, hmat(c(3,3), as.list(1:2)))
+#' compareMtoK(handy, hmat(c(4,4,4), as.list(1:3)))
+#' compareMtoK(handy, hmat(c(3,3,2,2), as.list(1:4)))
 library(algstat)
+options(max.print=1000000)
 
 doMetropolis <- function(init, mat) {
   
@@ -45,11 +53,14 @@ doMetropolis <- function(init, mat) {
 }
 
 compareMtoK <- function(init, mat) {
-  moves <- markov(mat)
-  cat("\nMARKOV-------------------")
-  doMetropolis(init, moves)
-  cat("\n\nKERNEL-------------------")
-  kernMoves <- matrix(m2_kernel(m2_matrix(A)))
-  doMetropolis(init, moves)
+  #moves <- markov(mat)
+  cat("\nMARKOV-------------------\n")
+  #print(moves)
+  #print(dim(moves))
+  #doMetropolis(init, moves)
+  cat("\n\nKERNEL-------------------\n")
+  kernMoves <- getKernMoves(mat)
+#  print(kernMoves)
+  print(dim(kernMoves))
+  #doMetropolis(init, moves)
 }
-compareMtoK(handy, A <- hmat(c(2,2), as.list(1:2)))
