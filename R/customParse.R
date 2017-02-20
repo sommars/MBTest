@@ -1,3 +1,4 @@
+#-------------------------------------------------------------------------------
 make_matrix_str <- function(mat) {
   matrix_str <- "matrix{"
   for (i in 1:nrow(mat)) {
@@ -11,6 +12,7 @@ make_matrix_str <- function(mat) {
   paste("kernel", matrix_str)
 }
 
+#-------------------------------------------------------------------------------
 parse_kernel <- function(kern) {
   # Could be better
   splitKern <- strsplit(kern, "\\^")
@@ -32,6 +34,7 @@ parse_kernel <- function(kern) {
   matrix(lapply(strsplit(matrix_str,","), as.numeric)[[1]], nrow = rowCount, ncol = colCount, byrow = TRUE)
 }
 
+#-------------------------------------------------------------------------------
 run_m2 <- function(code) {
   dir <- getwd()
   codeFile <- "M2FileCreatedByR.M2"
@@ -46,6 +49,7 @@ run_m2 <- function(code) {
   m2_output
 }
 
+#-------------------------------------------------------------------------------
 getKernMoves <- function(mat) {
   parse_kernel(run_m2(make_matrix_str(mat)))
 }
